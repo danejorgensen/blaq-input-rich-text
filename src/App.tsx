@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Admin, Resource } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { PostList, PostCreate } from './Posts';
+
+const App = () => (
+  <Admin dataProvider={jsonServerProvider('http://jsonplaceholder.typicode.com')} disableTelemetry>
+    <Resource
+      name="posts"
+      create={PostCreate}
+      list={PostList} />
+  </Admin>
+);
 
 export default App;
