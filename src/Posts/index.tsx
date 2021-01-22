@@ -22,12 +22,17 @@ export const PostList = (props) => (
 );
 
 const atValues = [
-  { id: 1, value: "Fredrik Sundqvist" },
-  { id: 2, value: "Patrik Sjölin" },
+  { id: 1, value: "Name" },
+  { id: 2, value: "Email" },
+  { id: 3, value: "FirstName" },
+  { id: 4, value: "LastName" },
 ];
+
 const hashValues = [
-  { id: 3, value: "Fredrik Sundqvist 2" },
-  { id: 4, value: "Patrik Sjölin 2" },
+  { id: 1, value: "Name" },
+  { id: 2, value: "Email" },
+  { id: 3, value: "FirstName" },
+  { id: 4, value: "LastName" },
 ];
 
 export const PostCreate = (props) => (
