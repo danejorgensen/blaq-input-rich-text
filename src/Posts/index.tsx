@@ -7,11 +7,12 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
+import { makeStyles } from '@material-ui/core/styles';
 import RichTextInput from "ra-input-rich-text";
-
-import "quill-handlebars/dist/quill.handlebars.css";
-import { makeStyles } from '@material-ui/core/styles'
 import "quill-handlebars";
+import "quill-handlebars/dist/quill.handlebars.css";
+
+import QuillEditor from '../quill/QuillEditor';
 
 export const PostList = (props) => (
   <List bulkActionButtons={false} exporter={false} {...props}>
@@ -21,64 +22,23 @@ export const PostList = (props) => (
   </List>
 );
 
-const atValues = [
-  { id: 1, value: "Name" },
-  { id: 2, value: "Email" },
-  { id: 3, value: "FirstName" },
-  { id: 4, value: "LastName" },
-];
-
-const hashValues = [
-  { id: 1, value: "Name" },
-  { id: 2, value: "Email" },
-  { id: 3, value: "FirstName" },
-  { id: 4, value: "LastName" },
-];
+const useStyles = makeStyles({
+  createPost: {
+    '& div': {
+      overflow: 'visible !important'
+    }
+  }
+});
 
 export const PostCreate = (props) => {
-  const useStyles = makeStyles({
-      createPost:{ '& div': {overflow: 'visible !important' }}
-  });
   const classes = useStyles();
+
   return (
-    <Fragment>
-      <Create className={classes.createPost} {...props}>
-        <SimpleForm >
-          <TextInput source="title" />
-          <RichTextInput
-            source="body"
-            options={{
-              modules:{
-              handlebars: {
-                allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-                handlebarsDenotationChars: ["{{"],
-                source: function (searchTerm, renderList, handlebarsChar) {
-                  let values;
-                  if (handlebarsChar === "{{") {
-                    values = atValues;
-                  } else {
-                    values = hashValues;
-                  }
-                  if (searchTerm.length === 0) {
-                    renderList(values, searchTerm);
-                  } else {
-                    const matches = [];
-                    for (let i = 0; i < values.length; i++)
-                      if (
-                        ~values[i].value
-                          .toLowerCase()
-                          .indexOf(searchTerm.toLowerCase())
-                      )
-                        matches.push(values[i]);
-                    renderList(matches, searchTerm);
-                  }
-                },
-              },
-            }
-            }}
-          />
-        </SimpleForm>
-      </Create>
-    </Fragment>
+    <Create className={classes.createPost} {...props}>
+      <SimpleForm >
+        <TextInput source="title" />
+        <QuillEditor />
+      </SimpleForm>
+    </Create>
   );
-}
+};
