@@ -1,10 +1,6 @@
 import React from 'react';
 import VariableSelect from './VariableSelect';
 
-const handleInsert = (props) => {
-  console.log('handleInsert: ', props);
-}
-
 const QuillToolbar = () => (
   <div id="toolbar">
     <span className="ql-formats">
