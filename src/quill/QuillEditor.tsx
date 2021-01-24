@@ -5,12 +5,11 @@ import RichTextInput from 'ra-input-rich-text';
 import QuillToolbar from './QuillToolbar';
 
 const handleInsert = (props) => {
-  console.log('handleInsert: ', props);
+  console.log('toolbars.handler.handleInsert: ', props);
 }
 
 const configureQuill = (quill) => {
   const toolbar = quill.getModule('toolbar');
-  //toolbar.addHandler('handlebars', (value) => { console.log('value: ', value); });
 };
 
 const atValues = [
@@ -28,7 +27,20 @@ const hashValues = [
 ];
 
 const asyncHandlebarsList = (searchTerm, renderList, handlebarsChar) => {
+  console.group('Handlebars');
+  console.log('searchTerm: ', searchTerm);
+  console.log('renderList: ', renderList);
+  console.log('handlebarsChar: ', handlebarsChar);
+  console.groupEnd();
+
   /* fetch results here */
+
+  return fetch('http://jsonplaceholder.typicode.com/posts', {
+      method: 'GET'
+    })
+    .then(response => {
+      return renderList(atValues, searchTerm);
+    });
 };
 
 const handlebarsList = (searchTerm, renderList, handlebarsChar) => {
@@ -60,7 +72,7 @@ const options = {
     handlebars: {
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
       handlebarsDenotationChars: ["{{"],
-      source: handlebarsList,
+      source: asyncHandlebarsList,
     },
     toolbar: {
       container: '#toolbar',
@@ -71,15 +83,24 @@ const options = {
   }
 };
 
-const QuillEditor = (props) => (
+interface Props {
+  label?: boolean;
+  source: string;
+};
+
+const QuillEditor = ({
+  label = false,
+  source = 'body',
+  ...rest
+}) => (
   <>
     <QuillToolbar />
     <RichTextInput
-      {...props}
+      {...rest}
       configureQuill={configureQuill}
-      label={false}
+      label={label}
       options={options}
-      source="body" />
+      source={source} />
   </>
 );
 

@@ -37,7 +37,7 @@ const QuillToolbar = () => (
       <button className="ql-image" />
     </span>
     <span className="ql-formats">
-      <VariableSelect onVariableInsert={handleInsert} resource="representment/variables" />
+      <VariableSelect resource="representment/variables" />
     </span>
   </div>
 );
