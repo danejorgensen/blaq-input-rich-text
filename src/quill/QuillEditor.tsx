@@ -48,10 +48,7 @@ const handlebarsList = (searchTerm, renderList, handlebarsChar) => {
 
 const handleHandlebars = (_this, value) => {
   const handlebars = _this.quill.getModule('handlebars');
-  handlebars.insertItem({
-    denotationChar: '{{',
-    value,
-  }, true);
+  handlebars.insertItem({ denotationChar: '{{', value }, true);
 };
 
 const options = {

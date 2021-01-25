@@ -57,7 +57,7 @@ const VariableSelect = ({
   return variables ? (
     <select className="ql-handlebars">
       {variables.map(variable =>
-        <option value={variable.value} />
+        <option label="Name" value={variable.value}>{variable.value}</option>
       )}
     </select>
   ) : null;

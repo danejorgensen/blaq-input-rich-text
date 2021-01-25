@@ -23,6 +23,9 @@ const QuillToolbar = () => (
         <option value="#d0d1d2" />
         <option selected />
       </select>
+      <select className="ql-whatever">
+        <option value="test" />
+      </select>
     </span>
     <span className="ql-formats">
       <button className="ql-list" value="ordered" />
