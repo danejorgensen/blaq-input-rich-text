@@ -4,6 +4,7 @@ import RichTextInput from 'ra-input-rich-text';
 import { makeStyles } from '@material-ui/core/styles';
 
 import QuillToolbar from './QuillToolbar';
+import { formats } from './formats';
 
 const useStyles = makeStyles(
   theme => ({
@@ -12,10 +13,6 @@ const useStyles = makeStyles(
     },
   })
 );
-
-const handleInsert = (props) => {
-  console.log('toolbars.handler.handleInsert: ', props);
-};
 
 const configureQuill = (quill) => {
   const toolbar = quill.getModule('toolbar');
@@ -49,7 +46,14 @@ const handlebarsList = (searchTerm, renderList, handlebarsChar) => {
     });
 };
 
+const handleHandlebars = (_this, value) => {
+  /* insert handlebars variable here */
+  console.log('this: ', _this);
+  console.log('value: ', value);
+};
+
 const options = {
+  formats,
   modules:{
     handlebars: {
       allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
@@ -59,8 +63,9 @@ const options = {
     toolbar: {
       container: '#toolbar',
       handlers: {
-//        handlebars: function(value) {
-//        },
+        handlebars: function(value) {
+          return handleHandlebars(this, value);
+        }
       }
     },
   }
