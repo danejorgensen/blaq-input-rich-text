@@ -1,0 +1,3 @@
+.ql-handlebars .ql-picker-item:before {
+  content: attr(data-label);
+}

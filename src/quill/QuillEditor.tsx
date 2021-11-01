@@ -5,6 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import QuillToolbar from './QuillToolbar';
 import { formats } from './formats';
+//import { HandlebarsClass } from './formats/handlebars';
+import "./handlebars.css";
+
+//Quill.register('formats/handlebars', HandlebarsClass);
 
 const useStyles = makeStyles(
   theme => ({
@@ -63,6 +67,7 @@ const options = {
       container: '#toolbar',
       handlers: {
         handlebars: function(value) {
+          console.log('handlebars.value: ', value);
           return handleHandlebars(this, value);
         }
       }
